@@ -1,0 +1,63 @@
+Ubuntu14.04编译caffe
+安装openblas
+a)       git clone https://github.com/xianyi/OpenBLAS.git
+
+cd OpenBLAS/
+apt-get install gfortran
+apt-get install gfortran-dev
+apt-get install libgfortran-4.8-dev
+make
+make PREFIX=/usr/local/openblas install
+
+b)       安装失败可直接apt-get install libopenblas-dev
+
+安装opencv
+a)       依赖python3的模块numpy， 通过pip3 install numpy安装
+
+b)      下载opencv包， tar -xvf opencv-3.0.0-beta.zip
+
+cmake ../ -DWITH_IPP=OFF
+make && make install
+
+c)        如果编译不成功，可以通过apt-get install libopencv-dev安装
+
+安装cudnn-6.5-linux-x64-v2
+a)       下载安装包解压
+
+b)       cp lib* /usr/local/cuda/lib64/
+
+cp cudnn.h /usr/local/cuda/include/
+
+其他三方库
+a)       apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libboost-all-dev libhdf5-serial-dev protobuf-compiler liblmdb-dev
+
+b)       如果安装libboost-all-dev失败，可以通过aptitude 安装  
+
+                      apt-get install aptitude 
+
+                       aptitude install libboost-all-dev
+
+c)        apt-get install libgflags-dev libgoogle-glog-dev
+
+编译caffe
+a)       cp Makefile.config.example Makefile.config
+
+b)       change:Makefile.config file:“BLAS :=open”
+
+c)        如果提示错误undefined reference to `cv::imread，则在LIBRARIES += opencv_core opencv_highgui opencv_imgproc 加上opencv_imgcodecs
+
+d)       如果没有nvidia显卡，可以CPU_ONLY := 1
+
+e)       make all
+
+f)        make test
+
+g)       make runtest
+
+编译pycaffe
+a)       如果提示找不到numpy/arrayobject.h，查看是否文件在/usr/local/lib/python2.7/dist-packages/numpy/core/include/numpy/，需要更新Makefile的头文件路径
+
+b)       如果运行python脚本提示No module named caffe，需要指定PYTHONPATH
+
+c)       如果提示No module named skimage.io，安装pip install scikit-image
+
