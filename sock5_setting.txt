@@ -1,0 +1,25 @@
+
+server side:
+1. get the sock5
+2. compile and install
+3. by default the ss5 need the daemon, it may failed due to invalid file
+symbolic .., can simple type the ss5 to start the server
+4. /etc/opt/ss5/ss5.conf
+auth    0.0.0.0/0               -               u
+permit -        0.0.0.0/0       -       0.0.0.0/0       -       -       -       -       -
+5. add the passwd to ss5.passwd
+user passwd
+  issue: you may need the libpam0g-dev  for ubuntu
+
+client side: use the tsocks 
+1. /etc/tsocks.conf
+local = 40.0.0.0/255.0.0.0
+
+#server = nine21559.cloudapp.net
+server = 40.83.126.97
+server_type = 5
+server_port = 1080
+2. set the env pass and user
+   export TSOCKS_USERNAME=user_ss5
+   export TSOCKS_PASSWORD=passwd_ss5
+3. start the appliction by tsocks application ...
