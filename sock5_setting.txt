@@ -1,7 +1,7 @@
 
 server side:
 1. get the sock5
-2. compile and install
+2. compile and install(you may have to use the gcc-4 version to build, check the compiler by dpkg -l | grep gcc | awk '{print $2}', and install by apt-get install g++-4.8)
 3. by default the ss5 need the daemon, it may failed due to invalid file
 symbolic .., can simple type the ss5 to start the server
 4. /etc/opt/ss5/ss5.conf
