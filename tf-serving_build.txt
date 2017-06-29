@@ -85,6 +85,17 @@ compilation terminated.
 解决方法：修改serving/tensorflow/tensorflow/contrib/BUILD文件，将其中第49行注掉即可。
 修改完成后执行bazel clean --expunge && export TF_NEED_CUDA=1，然后重新编译。
 该问题的讨论详见：https://github.com/tensorflow/serving/issues/336
+
+或者：
+git clone https://github.com/NVIDIA/nccl.git
+cd nccl/
+make CUDA_HOME=/usr/local/cuda
+
+sudo make install
+sudo mkdir -p /usr/local/include/external/nccl_archive/src
+sudo ln -s /usr/local/include/nccl.h /usr/local/include/external/nccl_archive/src/nccl.h
+
+
 3.如果上述问题解决，成功编译，那就ok了，恭喜build成功！
 
 如果运行例子时继续报错：
