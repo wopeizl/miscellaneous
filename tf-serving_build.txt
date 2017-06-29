@@ -1,5 +1,8 @@
 官方安装文档参考：https://tensorflow.github.io/serving/setup
 
+有问题参考
+https://www.tensorflow.org/install/install_linux
+
 安装依赖环境：
 
 1. 安装bazel
@@ -41,7 +44,7 @@ cd tensorflow
 cd ..
 7. 编译安装
 
-bazel --output_base=/data/wujiaxing/workspace/bazel/output --output_user_root=/data/wujiaxing/workspace/bazel build -c opt --config=cuda //tensorflow_serving/...
+bazel --output_base=./output/output/ --output_user_root=./output/bazel/ build -c opt --config=cuda //tensorflow_serving/...
 
 注意：编译GPU版本需要加上 --config=cuda参数才行，否则不会生效
 
