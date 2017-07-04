@@ -1,0 +1,13 @@
+server side:
+1. install node.js
+2. npm install ws
+3. get https://github.com/phoboslab/jsmpeg
+4. node stream-server.js secret
+5. play the video such as:
+   ffmpeg -i 20151015_110641.mp4 -f mpeg1video -b 800k -r 30 http://127.0.0.1:8081/test
+   ffmpeg -i d:\xfmovie\Ode.to.Joy.EP01-42.2016.WEB-DL.1080p.x264.AAC-HQC\34.mp4 -f mpeg1video -b 800k -r 30 http://127.0.0.1:8081/test
+   ffmpeg -i 20151015_110641.mp4 -f mpegts -codec:v mpeg1video -s 960x540  -r 30 -bf 0 -codec:a mp2 -ar 44100 -ac 1 -b:a 128k http://127.0.0.1:8081/test
+   ffmpeg -i 20151015_110641.mp4 -f mpegts -codec:v mpeg1video   -r 30 -bf 0 -codec:a mp2 -ar 44100 -ac 1 -b:a 128k http://127.0.0.1:8081/test
+
+client side:
+1. view the exampel view-stream.html in jsmpeg
