@@ -110,3 +110,49 @@ ImportError: cannot import name nccl with a minst example.
 
 该问题讨论详见：http://forums.fedoraforum.org/archive/index.php/t-194667.html和https://github.com/timschmidt/repsnapper/issues/79
 
+
+
+way to generate the .so file for model_server
+1. append the following into models_server/BUILD
+
+# test for new so file 20170703
+cc_binary(
+     name = "test_model_server.so",
+     srcs = [
+         "tf_model_server.cc",
+         "tf_model_server.h",
+     ],
+    #hdrs = ["tf_model_server.h"],
+     visibility = [
+          "//visibility:public",
+      ],
+    # linkstatic = 1,     
+     linkshared=1,
+
+     deps = [
+         ":model_platform_types",
+         ":platform_config_util",
+         ":server_core",
+         "@protobuf//:cc_wkt_protos",
+         "@org_tensorflow//tensorflow/core:lib",
+         "@org_tensorflow//tensorflow/core/platform/cloud:gcs_file_system",
+         "@org_tensorflow//tensorflow/core/platform/hadoop:hadoop_file_system",
+         "//tensorflow_serving/apis:prediction_service_proto",
+         "//tensorflow_serving/config:model_server_config_proto",
+         "//tensorflow_serving/core:availability_preserving_policy",
+         "@org_tensorflow//tensorflow/contrib:contrib_kernels",
+         "@org_tensorflow//tensorflow/contrib:contrib_ops_op_lib",
+         "@org_tensorflow//tensorflow/core:tensorflow",
+         "//tensorflow_serving/servables/tensorflow:classification_service",
+         "//tensorflow_serving/servables/tensorflow:get_model_metadata_impl",
+         "//tensorflow_serving/servables/tensorflow:multi_inference",
+         "//tensorflow_serving/servables/tensorflow:regression_service",
+         "//tensorflow_serving/servables/tensorflow:saved_model_bundle_source_adapter",
+         "//tensorflow_serving/servables/tensorflow:session_bundle_source_adapter",
+         "//tensorflow_serving/servables/tensorflow:predict_impl",
+     ],
+)
+
+2. build with script:
+bazel --output_base=./output/output/ --output_user_root=./output/bazel/ build -c opt --config=cuda --verbose_failures //tensorflow_serving/model_servers:test_model_server.so
+
