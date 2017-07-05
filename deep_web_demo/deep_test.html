@@ -131,8 +131,11 @@ alert(eval(obj));
 */
     //var data ="{" + '"method":"flip","data":"' + body + '"}' 
     var data = {
-    //    method: 'flip',
-        method: 'caffe',
+//        method: 'flip',
+//        method: 'yolo',
+  //       method: 'tensorflow',
+       method: 'caffe',
+       res_dataT: 3,
         data: body
     }
      data = JSON.stringify(data)
