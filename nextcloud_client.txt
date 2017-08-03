@@ -1,0 +1,13 @@
+https://github.com/nextcloud/client_theming
+
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt-get update
+sudo apt-get install nextcloud-client
+
+then start the client via:
+nextcloudcmd -u user -p pass /data http://server:ip
+
+QA:
+1. add-apt-repository command not found
+    apt-get update
+    apt-get install software-properties-common
