@@ -1,0 +1,7 @@
+1. list the container by docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+a887c6f50c83        newclient           "/bin/bash"         About a minute ago   Up About a minute                       mad_saha
+
+2. docker commit a887c6f50c83 newcontainer
+3. docker run -it -v /data:/data newcontainer /bin/bash
+4. then get the newcontainer
