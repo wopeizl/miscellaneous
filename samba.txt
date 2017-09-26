@@ -1,0 +1,14 @@
+1. install samba via yum install samba
+2. vim /etc/samba/sam.conf
+[share]
+comment = my data
+path = /share
+public = yes
+writable = yes
+create mask=0765
+3. mkdir /share
+   add user and pass : smbpasswd -a work
+4. /etc/init.d/smb start
+5. connect to on mac:
+	open finder->forward->connect server
+        input user and pass

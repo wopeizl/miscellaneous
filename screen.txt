@@ -1,0 +1,2 @@
+screen -dmS intellserver -d -m
+sudo ./IntelliJIDEALicenseServer_darwin_amd64 &
