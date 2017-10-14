@@ -1,0 +1,6 @@
+when use the ffmpeg to decode the pipe mp4 format, you may encouter the error like : partial file ...
+that is because the information section is after the frame which is normally due to the capture facility such as iphone however it may make the ffmpeg fail to recognize on pipe mode.
+
+fix by use the qt-faststart input.avi output.avi
+you can install the tool via pip install qtfaststart or download the binary which is normally under ffmpeg/tool
+
