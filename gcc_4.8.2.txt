@@ -1,0 +1,68 @@
+手动安装gcc 4.8.5
+按 Ctrl+C 复制代码
+
+# 下载gcc
+wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.8.5/gcc-4.8.5.tar.gz
+# 解压并进入目录
+tar -zxvf gcc-4.8.5.tar.gz
+cd gcc-4.8.5
+ 
+# 安装依赖三大件，会自动顺序安装gmp、mpfr、mpc
+./contrib/download_prerequisites
+ 
+# 回到上级，创建编译目录 gcc-4.8.5-build
+cd ..
+mkdir gcc-4.8.5-build
+cd gcc-4.8.5-build
+ 
+# 开始编译安装
+../gcc-4.8.5/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --build=x86_64-linux --disable-multilib
+# 设置环境变量 LD_LIBRARY_PATH
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+## make -j$(nproc)
+make -j8
+make install
+按 Ctrl+C 复制代码
+ 
+
+编译安装说明以及注意
+
+1、服务器是 x86_64 最好在configure阶段加上编译选项–build=x86_64-linux，避免找不到到文件之类的错误
+
+2、–prefix 不覆盖原来的gcc，自定义编译安装路径
+
+3、–enable-languages  编译出来的gcc支持的语言
+
+4、LD_LIBRARY_PATH 环境变量很重要，如果不指定，make会出奇奇怪怪的错误，LD_LIBRARY_PATH用于在程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径
+
+5、make -j8 指定线程个数，我这里是8线程cpu
+
+三、配置环境变量PATH
+
+在文件 ~/.bashrc 中添加下面一行
+export PATH=/usr/local/gcc/bin:$PATH
+保存后执行 source ~/.bashrc
+ 
+
+ 
+ 
+
+[root@huangdc local]# gcc -v
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/local/gcc/libexec/gcc/x86_64-linux/4.8.5/lto-wrapper
+Target: x86_64-linux
+Configured with: ../gcc-4.8.5/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --build=x86_64-linux --disable-multilib
+Thread model: posix
+gcc version 4.8.5 (GCC)
+ 四、检查最新版gcc
+复制代码
+[root@huangdc local]# gcc -v
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/local/gcc/libexec/gcc/x86_64-linux/4.8.5/lto-wrapper
+Target: x86_64-linux
+Configured with: ../gcc-4.8.5/configure --prefix=/usr/local/gcc --enable-languages=c,c++ --build=x86_64-linux --disable-multilib
+Thread model: posix
+gcc version 4.8.5 (GCC)
+复制代码
