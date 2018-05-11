@@ -1,0 +1,4 @@
+the init.sh is a help script to do:
+1. generate the passwd and conf info for current user
+
+start the proftpd via : service proftpd start
