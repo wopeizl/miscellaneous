@@ -1,0 +1,4 @@
+Build
+
+cmake .. -G "Visual Studio 14 2015 Win64" -DWITH_GPU=ON -DWITH_MKL=OFF -DWITH_STATIC_LIB=ON -DCMAKE_BUILD_TYPE=Release -DDEMO_NAME=inference_icnet -DPADDLE_LIB=pathto\fluid_inference_install_dir -DCUDA_LIB=D:\CUDA\v8.0\lib\x64
+
