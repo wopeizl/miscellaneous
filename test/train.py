@@ -5,11 +5,13 @@ import mobilenet_v2
 import reader
 import paddle.fluid as fluid
 import paddle
-import config as cfg
+from config import Config
+
+cfg = Config(file('test.cfg'))
 
 # 获取分类器
 image = fluid.layers.data(name='image', shape=[cfg.TRAIN.IMAGE_CHANNEL, cfg.TRAIN.IMAGE_WIDTH, cfg.TRAIN.IMAGE_HEIGHT], dtype='float32')
-net = mobilenet_v2.mobilenet_v2(input=image, class_dim=cfg.TRAIN.CLASS_DIM, scale=1.0)
+net = mobilenet_v2.MobileNetV2().net(input=image, class_dim=cfg.TRAIN.CLASS_DIM, scale=1.0)
 
 # 获取损失函数和准确率函数
 label = fluid.layers.data(name='label', shape=[1], dtype='int64')
