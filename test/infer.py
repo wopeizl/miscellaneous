@@ -2,8 +2,10 @@
 
 import paddle.fluid as fluid
 from PIL import Image
-import config as cfg
+from config import Config
 import numpy as np
+
+cfg = Config(file('test.cfg'))
 
 # 获取执行器
 place = fluid.CPUPlace()
