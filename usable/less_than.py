@@ -1,4 +1,6 @@
 
+# coding:utf8
+
 from paddle import fluid
 
 x = fluid.layers.fill_constant(shape=[1], dtype='int64', value=5)
