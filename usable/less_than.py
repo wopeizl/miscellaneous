@@ -12,6 +12,8 @@ y = fluid.layers.fill_constant(shape=[1], dtype='int64', value=1)
 z = x + y
 exe.run(fluid.default_main_program(), fetch_list=[z])
 
+# use the data as input would be ok
+# z = fluid.layers.data(name='xx', shape=[1], dtype='int64')
 
 a = fluid.layers.fill_constant(shape=[1], dtype='int64', value=1)
 
