@@ -33,13 +33,12 @@ spec:
         - {name: PADDLE_JOB_NAME, value: fluid-ctr}
         - {name: PADDLE_IS_LOCAL, value: '0'}
         - {name: PADDLE_TRAINERS, value: '1'}
-        - {name: PADDLE_PSERVERS, value: '1'}
         - {name: FLAGS_rpc_deadline, value: '36000000'}
         - {name: PADDLE_PSERVER_PORT, value: '30236'}
         - {name: PADDLE_TRAINING_ROLE, value: TRAINER}
         - {name: TRAINING_ROLE, value: TRAINER}
         - {name: LD_LIBRARY_PATH, value: '/usr/local/lib:/usr/local/nvidia/lib64:/usr/local/rdma/lib64:/usr/lib64/mlnx_ofed/valgrind'}
-        - {name: ENTRY, value: cd /workspace/ctr && python train.py --is_local 0 --trainer_id 0 --role trainer}
+        - {name: ENTRY, value: cd /workspace/ctr && python train.py --is_local 0 --cloud_train 1}
         image: wopeizl/paddle_ctr_distribute
         imagePullPolicy: Always
         name: trainer

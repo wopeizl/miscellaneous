@@ -118,6 +118,12 @@ def fetch_pod_id(label_selector, phase=None):
         if ips[i] == local_ip:
             return i
 
+    # in minikube there can be one node only
+    local_ip = os.getenv("POD_IP")
+    for i in xrange(len(ips)):
+        if ips[i] == local_ip:
+            return i
+
     return None
 
 

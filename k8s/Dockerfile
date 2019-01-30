@@ -18,8 +18,8 @@ RUN pip install -U kubernetes paddlepaddle
 #RUN sh -c 'echo "import paddle.v2 as paddle\npaddle.dataset.imikolov.fetch()" | python'
 RUN mkdir -p /workspace
 
-ADD https://raw.githubusercontent.com/PaddlePaddle/cloud/develop/docker/paddle_k8s /usr/bin
-ADD https://raw.githubusercontent.com/PaddlePaddle/cloud/develop/docker/k8s_tools.py /root
+ADD script/paddle_k8s /usr/bin
+ADD script/k8s_tools.py /root
 RUN chmod +x /usr/bin/paddle_k8s
 
 COPY ctr /workspace/ctr
