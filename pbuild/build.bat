@@ -107,6 +107,12 @@ dir %CUDA_NVCC_EXECUTABLE%
 cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=OFF -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH%  -DCUDA_NVCC_EXECUTABLE=%CCACHE_PATH%ccache.exe
 echo "replace the CUDA_NVCC_EXECUTABLE as %CCACHE_PATH%/ccache.exe"
 %BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" CMakeCache.txt
+for /F %%i in ('dir /s /b *.cu.obj.cmake.pre-gen') do (
+%BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" %%i
+)
+for /F %%i in ('dir /s /b *.cu.obj.Release.cmake') do (
+%BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" %%i
+)
 
 set CUDA_NVCC_EXECUTABLE=%CCACHE_PATH%ccache.exe
 rem set CUDA_NVCC_EXECUTABLE=%BATDIR%ccache.exe
@@ -130,6 +136,12 @@ dir %CUDA_NVCC_EXECUTABLE%
 cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=ON -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% -DNOAVX_CORE_FILE=%BATDIR%\%dst_path%\python\paddle\fluid\core_noavx.pyd -DCUDA_NVCC_EXECUTABLE=%CCACHE_PATH%/ccache.exe
 echo "replace the CUDA_NVCC_EXECUTABLE as %CCACHE_PATH%ccache.exe"
 %BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" CMakeCache.txt
+for /F %%i in ('dir /s /b *.cu.obj.cmake.pre-gen') do (
+%BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" %%i
+)
+for /F %%i in ('dir /s /b *.cu.obj.Release.cmake') do (
+%BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" %%i
+)
 
 set CUDA_NVCC_EXECUTABLE=%CCACHE_PATH%ccache.exe
 rem set CUDA_NVCC_EXECUTABLE=%BATDIR%ccache.exe
