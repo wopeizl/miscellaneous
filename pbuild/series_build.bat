@@ -37,13 +37,13 @@ echo %start_path%
 
 REM source_path PYTHON_DIR WITH_GPU WITH_MKL WITH_AVX BATDIR
 rem for /D %%i in (d:/v8.0 d:/v9.0 d:/v9.2 d:/v10.0) do (
-for /D %%i in (d:/v9.2 d:/v10.0) do (
+for /D %%i in (d:/v9.0 d:/v9.2 d:/v10.0) do (
 call %start_path%build.bat %source_path% c:\python27 ON ON %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python27 ON OFF %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python27 OFF ON %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python27 OFF OFF %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem 
-rem call %start_path%build.bat %source_path% c:\python35 ON ON %PADDLE_VERSION% %start_path% %release_dir% %%i
+call %start_path%build.bat %source_path% c:\python35 ON ON %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python35 ON OFF %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python35 OFF ON %PADDLE_VERSION% %start_path% %release_dir% %%i
 rem call %start_path%build.bat %source_path% c:\python35 OFF OFF %PADDLE_VERSION% %start_path% %release_dir% %%i

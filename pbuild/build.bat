@@ -133,7 +133,7 @@ echo "begin to do build avx ..."
 if "%WITH_CCACHE%"=="ON" (
 set CUDA_NVCC_EXECUTABLE=%CUDA_PATH_WIN%\bin\nvcc.exe
 dir %CUDA_NVCC_EXECUTABLE%
-cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=ON -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% -DNOAVX_CORE_FILE=%BATDIR%\%dst_path%\python\paddle\fluid\core_noavx.pyd -DCUDA_NVCC_EXECUTABLE=%CCACHE_PATH%/ccache.exe
+cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=ON -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% -DNOAVX_CORE_FILE=%dst_path%\python\paddle\fluid\core_noavx.pyd -DCUDA_NVCC_EXECUTABLE=%CCACHE_PATH%/ccache.exe
 echo "replace the CUDA_NVCC_EXECUTABLE as %CCACHE_PATH%ccache.exe"
 %BATDIR%\sed.exe -i -e "s?%NVCC_PATH%?%CCACHE_PATH%ccache.exe?g" CMakeCache.txt
 for /F %%i in ('dir /s /b *.cu.obj.cmake.pre-gen') do (
@@ -148,7 +148,7 @@ rem set CUDA_NVCC_EXECUTABLE=%BATDIR%ccache.exe
 msbuild /p:CLToolExe=ccache.exe /p:CLToolPath=%BATDIR% /m /p:Configuration=Release third_party.vcxproj >> build.log
 msbuild /p:CLToolExe=ccache.exe /p:CLToolPath=%BATDIR% /m /p:Configuration=Release paddle.sln >> build.log
 ) else (
-cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=ON -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% -DNOAVX_CORE_FILE=%BATDIR%\%dst_path%\python\paddle\fluid\core_noavx.pyd
+cmake ..\Paddle -G "Visual Studio 14 2015 Win64" -DWITH_GPU=%WITH_GPU% -DWITH_MKL=%WITH_MKL% -DWITH_AVX=ON -DWITH_STATIC_LIB=ON    -DWITH_FLUID_ONLY=ON -DWITH_DSO=ON -DPYTHON_INCLUDE_DIR=%PYTHON_DIR%\include\ -DPYTHON_LIBRARY=%PYTHON_DIR%\libs\ -DPYTHON_EXECUTABLE=%PYTHON_DIR%\python.exe -DCMAKE_BUILD_TYPE=Release -DWITH_TESTING=OFF -DWITH_PYTHON=ON -DCUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% -DNOAVX_CORE_FILE=%dst_path%\python\paddle\fluid\core_noavx.pyd
 
 msbuild /m /p:Configuration=Release third_party.vcxproj
 msbuild /m /p:Configuration=Release paddle.sln
