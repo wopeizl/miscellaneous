@@ -21,6 +21,12 @@ for /f "tokens=1,2,* delims=\\" %%a in ("%PYTHON_DIR%") do (
 )
 
 set PYTHONV=%c2%
+for /f "tokens=1,2,* delims=/" %%a in ("%CUDA_PATH%") do (
+	set x1=%%a
+	set x2=%%b
+)
+
+set CUDAV=%x2%
 
 if "%WITH_GPU%"=="ON" (
     set PLAT=GPU
@@ -38,11 +44,11 @@ if "%WITH_SAME_FOLDER%"=="ON" (
     set "dst_path=%source_path%\build"
     echo %dst_path%
 ) else (
-    set "dst_path=%source_path%\build_%PYTHONV%_%PLAT%_%BLAS%"
+    set "dst_path=%source_path%\build_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%"
     echo %dst_path%
 )
 
-set "pub_path=%release_dir%\build_%PYTHONV%_%PLAT%_%BLAS%"
+set "pub_path=%release_dir%\build_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%"
 echo %pub_path%
 mkdir %pub_path%
 
@@ -85,8 +91,8 @@ for /f %%i in ('dir /b %paddle_path%\test_*.py') do (
 
 echo copy %PADDLE_WHL_FILE_WIN% %pub_path%
 copy /Y %PADDLE_WHL_FILE_WIN% %pub_path%
-copy /Y %dst_path%\inference_dist\fluid_inference_install_dir.zip %pub_path%
-copy /Y %dst_path%\inference_dist\fluid_install_dir.zip %pub_path%
+copy /Y %dst_path%\inference_dist\fluid_inference_install_dir.zip %pub_path%\fluid_inference_install_dir_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%.zip
+copy /Y %dst_path%\inference_dist\fluid_install_dir.zip %pub_path%\fluid_install_dir_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%.zip
 
 :END
 rmdir /q /s %tmpdir%

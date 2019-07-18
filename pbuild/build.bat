@@ -1,4 +1,4 @@
-@ECHO ON
+@ECHO OFF
 SETLOCAL 
 set source_path=%1
 set PYTHON_DIR=%2
@@ -60,11 +60,11 @@ if "%WITH_SAME_FOLDER%"=="ON" (
     set "dst_path=%source_path%\build"
     echo %dst_path%
 ) else (
-    set "dst_path=%source_path%\build_%PYTHONV%_%PLAT%_%BLAS%"
+    set "dst_path=%source_path%\build_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%"
     echo %dst_path%
 )
 
-set "pub_path=%release_dir%\build_%PYTHONV%_%PLAT%_%BLAS%"
+set "pub_path=%release_dir%\build_%PYTHONV%_%PLAT%_%BLAS%_%CUDAV%"
 echo %pub_path%
 mkdir %pub_path%
 
